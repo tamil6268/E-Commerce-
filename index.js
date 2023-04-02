@@ -1,13 +1,14 @@
 const express=require('express');
 const app=express();
 const dotenv=require('dotenv').config();
-const bodyparser=require('body-parser');
+// const bodyparser=require('body-parser');
 const cors=require('cors');
 const connection=require('./database/mongoose');
 const ProductsRoutes=require('./Routes/Products');
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));//is must while getting req from backend
 app.use(cors());
-app.use(bodyparser.json());
 app.use('/',ProductsRoutes);
 
 app.listen(process.env.PORT,async()=>{
